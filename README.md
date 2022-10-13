@@ -6,7 +6,7 @@
 
   01_20220511主成分分析.pdf  
 
-- 参考にしたサイト
+- 参考にしたサイト  
 【主成分分析（PCA）まとめ】  
 https://www.hellocybernetics.tech/entry/2018/11/24/131114
 
