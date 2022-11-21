@@ -1,0 +1,175 @@
+\ProvidesPackage{beamerthemeOpencampus}
+  % Satoshi Mizuta
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\selectcolormodel{cmyk}
+
+\mode<presentation>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamercolor{section in head/foot}{use=structure,bg=structure.fg!30!bg}
+
+%\setbeamercolor{headline}{fg=blue,bg=taaluminium}
+\setbeamercolor{headline}{fg=blue}
+\setbeamercolor{footline}{fg=blue, bg=white}
+\setbeamercolor{separation line}{bg=red!60!green!30!black}
+\setbeamercolor{date in headline}{fg=red!50!green!20!black}
+\setbeamercolor{title in headline}{fg=blue}
+\setbeamercolor{author in headline}{fg=green!10!blue!80!black}
+%\setbeamercolor{institute in headline}{fg=blue!10!green!60!black}
+\setbeamercolor{institute in headline}{fg=red!100!green!70!blue!100}
+
+%\setbeamercolor{framesubtitle}{fg=ta3orange, bg=ta2gray}
+%\setbeamercolor{author in head/foot}{fg=ta2orange}
+%\setbeamercolor{title in head/foot}{fg=ta2orange}
+
+\setbeamercolor*{normal text}{fg=black}
+%\setbeamercolor{upper separation line head}{fg=ta2orange}
+
+\setbeamertemplate{blocks}[rounded][shadow=true]
+% \setbeamercolor*{block title}{fg=-structure.fg,bg=structure.fg!50!bg}
+\setbeamercolor*{block title}{fg=white, bg=structure.fg!50!black}
+%\setbeamercolor*{block body}{fg=black, bg=structure.fg!10!bg}
+\setbeamercolor*{block body}{fg=black, bg=structure.fg!5!white}
+\setbeamercolor*{description item}{fg=-structure.fg}
+
+\setbeamercolor*{bibliography entry author}{fg=black}
+\setbeamercolor*{caption name}{fg=black}
+\setbeamercolor*{enumerate item}{fg=blue}
+
+\setbeamerfont{footline}{size=\large,series=\tt}
+\setbeamerfont{block title}{size=\large,series=\bfseries}
+\setbeamerfont{enumerate/description item}{series=\bfseries}
+\setbeamerfont{caption}{size=\normalsize}
+
+%\setbeamercolor*{example body}{fg=ta3aluminium,bg=white}
+%\setbeamercolor*{example text}{fg=ta3aluminium,bg=white}
+%\setbeamercolor*{example title}{fg=ta2gray,bg=taorange}
+
+
+%\setbeamercolor{alerted text}{fg=ta3gray}
+%\setbeamercolor{example text}{fg=taorange}
+%\setbeamercolor{structure}{fg=ta3skyblue}
+
+%\setbeamertemplate{itemize items}[triangle]
+%\setbeamertemplate{itemize items}[circle]
+\setbeamertemplate{navigation symbols}{}  % no navigation on a poster
+
+%\setlength{\leftmargini}{4em}
+
+% equal font sizes for all levels
+\setbeamerfont{itemize/enumerate body}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subbody}{size=\normalsize}
+\setbeamerfont{itemize/enumerate subsubbody}{size=\normalsize}
+
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+\setbeamertemplate{caption}[numbered]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{block begin}{
+  \vskip.75ex
+  \begin{beamercolorbox}[rounded=true,shadow=true,leftskip=1cm,colsep*=.75ex]{block title}%
+  \usebeamerfont*{block title}{\insertblocktitle}
+  \end{beamercolorbox}%
+  {\ifbeamercolorempty[bg]{block body}{}{\nointerlineskip\vskip-0.5pt}}%
+  \usebeamerfont{block body}%
+  \begin{beamercolorbox}[rounded=true,shadow=true,colsep*=.75ex,sep=.75ex,vmode]{block body}%
+    \ifbeamercolorempty[bg]{block body}{\vskip-.25ex}{\vskip-.75ex}\vbox{}%
+  }
+  \setbeamertemplate{block end}{
+  \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setbeamertemplate{headline}{  
+  \leavevmode
+
+  \begin{beamercolorbox}[wd=\paperwidth]{headline}
+    \begin{columns}[T]
+      \column{.02\paperwidth}
+
+      \column{.8\paperwidth}
+      \vskip4ex
+      % \raggedleft
+      \usebeamercolor{date in headline}{\color{fg}\large{\insertdate}\\[1ex]}
+      \usebeamercolor{title in headline}{\color{fg}\textbf{\Huge{\inserttitle}}\\[1ex]}
+      \usebeamercolor{author in headline}{\color{fg}\LARGE{\insertauthor}\\[1ex]}
+      \usebeamercolor{institute in headline}{\color{fg}\Large{\insertinstitute}\\[1ex]}     
+
+      \column{.15\paperwidth}
+      \vskip8ex
+      \begin{center}
+        \includegraphics[width=\linewidth]{logo_hirodai.png}
+      \end{center}
+      \vskip2ex
+
+      \column{.02\paperwidth}
+
+    \end{columns}
+    \vskip2ex
+  \end{beamercolorbox}
+
+  % \begin{beamercolorbox}[wd=\paperwidth]{lower separation line head}
+  %   \rule{0pt}{3pt}
+  % \end{beamercolorbox}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \setbeamertemplate{footline}{
+%   \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
+%     \rule{0pt}{3pt}
+%   \end{beamercolorbox}
+  
+%   \leavevmode%
+%   \begin{beamercolorbox}[ht=4ex,leftskip=1em,rightskip=1em]{author in head/foot}%
+%     \texttt{slmizu@cc.hirosaki-u.ac.jp}
+%     \vskip1ex
+%   \end{beamercolorbox}
+%   \vskip0pt%
+%   \begin{beamercolorbox}[wd=\paperwidth]{lower separation line foot}
+%     \rule{0pt}{3pt}
+%   \end{beamercolorbox}
+% }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Display a grid to help align images ... and it looks nice with this color scheme
+%\beamertemplategridbackground[1cm]
+
+\AtBeginDocument{%
+  {
+    \usebeamercolor{section in head/foot}
+  }
+  
+  \pgfdeclareverticalshading{beamer@headfade}{\paperwidth}
+  {%
+    color(0cm)=(bg);
+%    color(1.25cm)=(section in head/foot.bg)%
+    color(10cm)=(section in head/foot.bg)%
+  }
+
+  \setbeamercolor{section in head/foot}{bg=}
+}
+
+%\addtoheadtemplate{\pgfuseshading{beamer@headfade}\vskip-1.25cm}{}
+\addtoheadtemplate{\pgfuseshading{beamer@headfade}\vskip-10cm}{}
+
+\beamertemplatedotitem
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mode<all>
+
+% adapt height of imtemize rectangles
+
+\setbeamertemplate{itemize items}[ball]
+% \setbeamertemplate{itemize items}[triangle]
+% \setbeamertemplate{itemize item}{\raisebox{0.12ex}{\rule{1em}{0pt}$\blacktriangleright$}}
+% \setbeamertemplate{itemize subitem}{\raisebox{0.12ex}{$\triangleright$}}
+
+% or define your own template using \defbeamertemplate{itemize item}, see beameruserguide.pdf
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-PDF-mode: t
+%%% TeX-master: "opencampus_poster"
+%%% End: 
