@@ -31,8 +31,3 @@ https://www.hellocybernetics.tech/entry/2018/11/24/131114
  1. youtube ヨビノリ「フーリエ変換」全5回  
   https://www.youtube.com/watch?v=HNHb0_mOTYw&t=39s
  2. 図書 フーリエ解析(理工系の数学入門コース 6) 大石進一  
-
-## 連絡事項
-- わからなかったらLINEで聞いてください。答えられる可能性があります。  
-- パワポの内容は必ずしも合ってません。
-  
