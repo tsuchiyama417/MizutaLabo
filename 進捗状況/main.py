@@ -33,7 +33,7 @@ def main():
     # 三次元座標群の作成
     animalarr = zahyou(animaldic, animalname)
 
-    # 主成分分析 v：固有ベクトル, e：固有値
+    # 主成分分析 v：固有ベクトル
     v, e = vec(animalarr, animalname)
     
     # 主成分分析して距離行列を作成
@@ -43,8 +43,7 @@ def main():
     trans_xy = trans(animalarr, v, animalname)
 
     # DFT
-    dft_plot = False
-    power = fourier(trans_xy, animalname, dft_plot)
+    power = fourier(trans_xy)
     
     # コサイン類似度
     cosine_similarity(power, animalname)
@@ -61,7 +60,6 @@ def fileopen(l, flag_min, flag_max):
     
     with gzip.open(fastafile, 'rt') as handle:
         for record in SeqIO.parse(handle, 'fasta'):
-            print(record)
             if record.id in l:
                 d[record.id] = ''.join(list(record.seq))
 
@@ -152,11 +150,11 @@ def vec(arr, name):
         
     # 符号を揃える（一番目の生物種に揃える）
     # + = True, - = False
-    mask = [[True] * 3 for _ in range(3)]
-    for i in range(3):
-        for j in range(3):
-            if vector[0][i][j] < 0:
-                mask[i][j] = False
+    # mask = [[True] * 3 for _ in range(3)]
+    # for i in range(3):
+    #     for j in range(3):
+    #         if vector[0][i][j] < 0:
+    #             mask[i][j] = False
 
     # 順番を揃える（固有値で降順）
     for i in range(len(value)):
@@ -170,12 +168,12 @@ def vec(arr, name):
                         vector[i][k][j], vector[i][k][j+1] = vector[i][k][j+1], vector[i][k][j]
                     f = 1
         
-        for j in range(3):
-            for k in range(3):
-                if mask[j][k] == True and vector[i][j][k] < 0:
-                    vector[i][j][k] *= -1
-                elif mask[j][k] == False and vector[i][j][k] > 0:
-                    vector[i][j][k] *= -1
+        # for j in range(3):
+        #     for k in range(3):
+        #         if mask[j][k] == True and vector[i][j][k] < 0:
+        #             vector[i][j][k] *= -1
+        #         elif mask[j][k] == False and vector[i][j][k] > 0:
+        #             vector[i][j][k] *= -1
 
     # 固有値・固有ベクトル
     save_file('ve', vector, value, name)
@@ -308,7 +306,7 @@ def dft(f):
         Y.append(y)
     return Y
 
-def fourier(l, name, flag):
+def fourier(l):
 
     power = []
     for i in range(len(l[0])):
@@ -318,34 +316,7 @@ def fourier(l, name, flag):
         power.append(np.abs(fy))
         # 0番目は平均なのでのぞく
         power[i] = power[i][1:]
-    
-    
-    # if flag == True:
-    #     # 色
-    #     colors = ["red","coral","gold","olive","cyan","blue","purple","magenta","green"]
-        
-    #     for i in range(len(power)):
-    #         # 全体のグラフを作成
-    #         Figure = plt.figure()
-    #         # loc
-    #         ax0 = Figure.add_subplot(1,1,1)
-    #         # title
-    #         ax0.set_title('DFT ' + name[i], fontname="MS Gothic")
-    #         # xlabel
-    #         ax0.set_xlabel('周波数[Hz]', fontname="MS Gothic")
-    #         # ylabel
-    #         ax0.set_ylabel('パワースペクトル', fontname="MS Gothic")
-    #         # x
-    #         ax0.set_xlim(-5,len(l[1][i])+5)
-    #         ax0.set_xticks(list(range(0,len(l[1][i])+5,100)))
-            
-    #         # plot
-    #         ax0.plot(power[i], color = colors[i])
-            
-    #         # save
-    #         dir = 'dft/'
-    #         plt.savefig(dir + 'dft_' + name[i]+'.png')
-            
+
     return power
 
 def cosine_similarity(p, name):
@@ -383,7 +354,7 @@ def save_file(s, *val):
     # 生物種配列
     if s == 'arr':
         data = val[0]
-        path = 'data/arr.txt'
+        path = 'data/arr/arr.txt'
         if os.path.isfile(path):
             os.remove(path)
         f = open(path, 'w')
@@ -399,7 +370,7 @@ def save_file(s, *val):
     # 整形後の生物種配列
     elif s == 'arr_shaping':
         data = val[0]
-        path = 'data/arr_shaping.txt'
+        path = 'data/arr/arr_shaping.txt'
         if os.path.isfile(path):
             os.remove(path)
         f = open(path, 'w')
@@ -415,7 +386,7 @@ def save_file(s, *val):
     # 三次元座標群
     elif s == 'arr_graph':
         data = val[0]
-        path = 'data/arr_graph.txt'
+        path = 'data/arr/arr_graph.txt'
         if os.path.isfile(path):
             os.remove(path)
         f = open(path, 'w')
@@ -435,7 +406,7 @@ def save_file(s, *val):
     elif s == 'arr_graph_pic':
         data = val[0]
         name = val[1]
-        path = 'data/arr_graph.png'
+        path = 'data/arr/arr_graph.png'
         if os.path.isfile(path):
             os.remove(path)
         # グラフの枠を作成
@@ -465,6 +436,7 @@ def save_file(s, *val):
         #labelを表示
         plt.legend()
         # 最後に.show()を書いてグラフ表示
+        plt.show()
         # 画像を保存
         fig.savefig(path, transparent=False)
     
@@ -549,7 +521,10 @@ def save_file(s, *val):
             path = 'data/power/power_' + name[i] + '.png'
             if os.path.isfile(path):
                 os.remove(path)
-            plt.figure()
+            fig = plt.figure()
+            ax = fig.add_subplot(1,1,1)
+            # y軸をlogスケールで描く
+            ax.set_yscale('log')  
             plt.plot(p[i], color=colors[i], label = name[i])
             #labelを表示
             plt.legend()
